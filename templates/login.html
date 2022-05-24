@@ -1,0 +1,38 @@
+{% extends 'nav.html' %}
+{% block title %}Login{% endblock %}
+<!-- login form section starts  -->
+
+{% block body %}
+<section class="login">
+{% csrf_token %}
+    <form action="{% url 'Login' %}" method="post">
+        {% if messages %}
+  {% for message in messages %}
+          <div role="alert">
+  <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+    Error:
+  </div>
+  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+       <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <p>
+    {{message}}</p>
+       </div>
+  </div>
+</div>
+  {% endfor %}
+{% endif %}
+        <h3>login now</h3>
+        <input type="email" required name="logemail" placeholder="enter your email" id="" class="box">
+        <input type="password" required name="logpass" placeholder="enter your password" id="" class="box">
+        <div class="remember">
+            <input type="checkbox" name="" id="remember-me">
+            <label for="remember-me"> remember me </label>
+        </div>
+        <input type="submit" value="login now" class="btn">
+        <p>don't have an account?</p>
+        <a href="/register/" class="btn link">register now</a>
+    </form>
+
+</section>
+
+{% endblock %}

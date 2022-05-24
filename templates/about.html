@@ -1,0 +1,128 @@
+{% extends 'nav.html' %}
+
+{% block title %}About{% endblock %}
+{% block cart %}
+ {% if request.user.is_authenticated %}
+            <a href="/cart/" class="fas fa-shopping-cart"><font color="#7cfc00">{{ cart }}</font></a>
+        {% else %}
+        <a href="/login/" class="fas fa-user"></a>
+     {% endif %}
+{% endblock %}
+{% block body %}
+    {% load static %}
+<section class="about">
+
+    <div class="image">
+        <img src="{% static 'images/about-img.png' %}" alt="">
+    </div>
+
+    <div class="content">
+        <h3>Major Project</h3>
+        <p>CU Granite is a prototype of a granite selling store. As it is a prototype, it is not fully funcyional and is just an example to show visually what it would look like as an online granite selling website.</p>
+        <p>We do not own any of the contents and information including pictures in this website and all credit goes to the rightful owner</p>
+        <a href="/" class="btn">Home</a>
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- faq section starts  -->
+
+<section class="faq">
+
+    <h1 class="heading"> questions & <span>answers</span> </h1>
+
+    <div class="accordion-container">
+
+        
+
+        <div class="accordion">
+            <div class="accordion-heading">
+                <h3>how to place order online?</h3>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <p class="accordioin-content">
+                CU Granite is a prototype of a granite selling store. As it is a prototype, it is not fully funcyional and is just an example to show visually what it would look like as an online granite selling website. We do not own any of the contents and information including pictures in this website and all credit goes to the rightful owner
+            </p>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-heading">
+                <h3>how to pay online?</h3>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <p class="accordioin-content">
+                CU Granite is a prototype of a granite selling store. As it is a prototype, it is not fully funcyional and is just an example to show visually what it would look like as an online granite selling website. We do not own any of the contents and information including pictures in this website and all credit goes to the rightful owner
+            </p>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-heading">
+                <h3>is online payment safe?</h3>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <p class="accordioin-content">
+                CU Granite is a prototype of a granite selling store. As it is a prototype, it is not fully funcyional and is just an example to show visually what it would look like as an online granite selling website. We do not own any of the contents and information including pictures in this website and all credit goes to the rightful owner
+            </p>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-heading">
+                <h3>how to contact service center?</h3>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <p class="accordioin-content">
+                CU Granite is a prototype of a granite selling store. As it is a prototype, it is not fully funcyional and is just an example to show visually what it would look like as an online granite selling website. We do not own any of the contents and information including pictures in this website and all credit goes to the rightful owner
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- faq section ends -->
+
+<!-- review section starts  -->
+
+<section class="review">
+
+    <h1 class="heading"> Project <span>Members</span> </h1>
+
+    <div class="swiper review-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <img src="{% static 'images/pic-1.png' %}" alt="">
+                <h3>Rongsensashi Walling</h3>
+                <span>Frontend</span>
+                <p>20MCA1510.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <img src="{% static 'images/pic-2.png' %}" alt="">
+                <h3>Prem Rahol Yadav</h3>
+                <span>Backend</span>
+                <p>20MCA1500.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <img src="{% static 'images/pic-3.png' %}" alt="">
+                <h3>Rajat Kumar</h3>
+                <span>Chatbot</span>
+                <p>20MCA1485.</p>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section ends -->
+
+{% endblock %}
+
+>

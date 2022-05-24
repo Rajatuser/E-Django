@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- swiper css link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+     {% load static %}
+    <!-- cusom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="header">
+
+    <a href="/" class="logo"> <i class="fas fa-store"></i> CU Granite </a>
+
+ <form action="{% url 'search' %}" method="get" class="search-form">
+     {% if search|length > 0 %}
+          <input type="text" required name="product" id="search-box" placeholder="Latest search = {{ search }}">
+     {% else %}
+          <input type="text" required name="product" id="search-box" placeholder="Search by product name">
+     {% endif %}
+
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+    <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div id="search-btn" class="fas fa-search"></div>
+    {% block cart %}
+    {% endblock %}
+
+    </div>
+
+</header>
+
+<div class="side-bar">
+    <div id="close-side-bar" class="fas fa-times"></div>
+
+ {% if request.user.is_superuser %}
+    <div class="user">
+        <img src="{% static 'images/user-img.png' %}" alt="">
+        <h3>Welcome Admin</h3>
+        <a href="/logout/">log out</a>
+    </div>
+      {% elif request.user.is_authenticated %}
+      <div class="user">
+        <img src="{% static 'images/user-img.png' %}" alt="">
+        <h3>Welcome {{ request.user.first_name }}</h3>
+        <a href="/logout/">log out</a>
+    </div>
+{% endif %}
+
+
+    <nav class="navbar">
+        <a href="/"> <i class="fas fa-angle-right"></i> home </a>
+        <a href="/about/"> <i class="fas fa-angle-right"></i> about </a>
+        <a href="/products/"> <i class="fas fa-angle-right"></i> products </a>
+        <a href="/contact/"> <i class="fas fa-angle-right"></i> contact </a>
+        {% if request.user.is_authenticated %}
+        <a href="/cart/"> <i class="fas fa-angle-right"></i> my cart </a>
+        {% else %}
+        <a href="/login/"> <i class="fas fa-angle-right"></i> login </a>
+        <a href="/register/"> <i class="fas fa-angle-right"></i> register </a>
+{% endif %}
+    </nav>
+
+</div>
+
+{% block body %}
+
+{% endblock %}
+
+
+
+
+
+
+<section class="quick-links">
+
+    <a href="home.html" class="logo"> <i class="fas fa-store"></i> CU Granite </a>
+
+
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+    </div>
+
+</section>
+
+<section class="credit">
+
+    <p> created for <span>Major Project</span> | all rights reserved! </p>
+
+    <img src="{% static 'images/card_img.png' %}" alt="">
+
+</section>
+
+<!-- footer section ends -->
+<!-- swiper js link      -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{% static 'js/script.js' %}"></script>
+
+
+{% if request.user.is_authenticated %}
+<script type="text/javascript">
+    (function(d, m){
+
+    /*---------------- Kommunicate settings start ----------------*/
+
+     var kommunicateSettings = {
+      "appId": "26ec6ba3d592f4f5981d6ea4287213a82",
+         "userId": '{{ request.user.email }}',
+    "email": '{{ request.user.email }}',
+    "password": '{{ request.user.password }}',
+    "authenticationTypeId" : 0,
+      "automaticChatOpenOnNavigation": true,
+      "popupWidget": true,
+
+      };
+
+    /*----------------- Kommunicate settings end ------------------*/
+
+     var s = document.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0];
+      h.appendChild(s);
+      window.kommunicate = m;
+      m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+</script>
+
+{% endif %}
+
+</body>
+</html>

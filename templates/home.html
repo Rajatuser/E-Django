@@ -1,0 +1,97 @@
+{% extends 'nav.html' %}
+
+    
+{% block cart %}
+ {% if request.user.is_authenticated %}
+     <a href="/cart/" class="fas fa-shopping-cart"><font color="#7cfc00">{{ cart }}</font></a>
+        {% else %}
+        <a href="/login/" class="fas fa-user"></a>
+     {% endif %}
+{% endblock %}
+ {% block body %}
+<!-- home section starts  -->
+{% load static %}
+<section class="home">
+
+    <div class="swiper home-slider">
+
+        <div class="swiper-wrapper">
+             {% for i in sales %}
+    <div class="swiper-slide slide">
+            <div class="image">
+                <img src="{{ i.product.product_image.url }}" alt="">
+            </div>
+            <div class="content">
+                <span>upto {{ i.sale }}% off</span>
+                <a href="/products/" class="btn">shop now</a>
+
+            </div>
+        </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+
+<!-- home section ends -->
+
+
+    <!-- banner section starts  -->
+<section class="banner">
+
+    <div class="box-container">
+
+        <a href="#" class="box">
+            <img src="{% static 'images/banner-1.jpg' %}" alt="">
+            
+        </a>
+
+        <a href="#" class="box">
+            <img src="{% static 'images/banner-2.jpg' %}" alt="">
+           
+        </a>
+
+        <a href="#" class="box">
+            <img src="{% static 'images/banner-3.jpg' %}" alt="">
+            
+        </a>
+        
+    </div>
+
+</section>
+
+<!-- banner section ends -->
+
+<!-- arrivals section starts  -->
+
+<section class="arrivals">
+
+    <h1 class="heading"> new <span>arrivals</span> </h1>
+
+    <div class="box-container">
+{% for i in products %}
+        <div class="box">
+            <div class="image">
+                <img src="{{ i.product_image.url }}" class="main-img" alt="">
+                <img src="{{ i.product_image_hover.url }}" class="hover-img" alt="">
+            </div>
+            <div class="content">
+                <h3>{{ i.product_name }}</h3>
+                <div class="price"> ${{ i.product_discount_price }} <span>${{ i.product_actual_price }}</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

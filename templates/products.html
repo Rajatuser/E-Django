@@ -1,0 +1,107 @@
+{% extends 'nav.html' %}
+{% block title %}Products{% endblock %}
+{% block cart %}
+ {% if request.user.is_authenticated %}
+            <a href="/cart/" class="fas fa-shopping-cart"><font color="#7cfc00">{{ cart }}</font></a>
+        {% else %}
+        <a href="/login/" class="fas fa-user"></a>
+     {% endif %}
+{% endblock %}
+
+{% block body %}
+<!-- category section starts  -->
+{% load static %}
+
+
+
+<!-- category section ends -->
+
+<!-- products section starts  -->
+
+<section class="products">
+
+    <h1 class="heading"> featured <span>products</span> </h1>
+
+    <div class="box-container">
+
+{% for i in products %}
+        <div class="box">
+            <div class="image">
+                <img src="{{ i.product_image.url }}" class="main-img" alt="">
+                <img src="{{ i.product_image_hover.url }}" class="hover-img" alt="">
+            </div>
+            <div class="content">
+                <h3>{{ i.product_name }}</h3>
+
+    {% if i.product_id in incart %}
+   <h3 style="color:lightseagreen">In your cart</h3>
+        {% csrf_token %}
+         <form method="post" action="{% url 'delete'%}">
+         <input type="hidden" name="delcart" value="{{ i.product_id }}">
+        <button type="submit" style="color:lightseagreen;padding: 5px 5px 5px 5px;border-radius: 0.5em;">Remove</button>
+        </form>
+        {% else %}
+         <form method="post" action="{% url 'add'%}">
+         <input type="hidden" name="adcart" value="{{ i.product_id }}">
+        <button type="submit" style="color:lightseagreen;padding: 5px 5px 5px 5px;border-radius: 0.5em;">Add to cart</button>
+         </form>
+
+    {% endif %}
+
+                <div class="price">${{ i.product_discount_price }}</div><span style="text-decoration-line:line-through ">${{ i.product_actual_price }}</span></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- products section ends -->
+
+<!-- product banner section starts  -->
+
+<section class="product-banner">
+
+    <h1 class="heading"> <span>deal</span> of the day </h1>
+
+    <div class="box-container">
+ {% for i in sales %}
+        <div class="box">
+            <img src="{{ i.product.product_image.url }}" alt="">
+
+            <div class="content">
+              <h3 style="color:darkblue;backdrop-filter: blur(2px)">{{ i.product.product_name }}</h3>
+               <span style="color:darkblue;font-weight: bolder;">special offer</span>
+            <h3 style="color:whitesmoke">upto {{ i.sale }}% off</h3>
+
+    {% if i.product.product_id in incart %}
+   <h3 style="color:darkblue">In your cart</h3>
+        {% csrf_token %}
+         <form method="post" action="{% url 'delete'%}">
+         <input type="hidden" name="delcart" value="{{ i.product_id }}">
+        <button type="submit" style="color:lightseagreen;padding: 5px 5px 5px 5px;border-radius: 0.5em;">Remove</button>
+        </form>
+        {% else %}
+         <form method="post" action="{% url 'add'%}">
+         <input type="hidden" name="adcart" value="{{ i.product_id }}">
+        <button type="submit" style="color:lightseagreen;padding: 5px 5px 5px 5px;border-radius: 0.5em;">Add to cart</button>
+         </form>
+    {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    
+</section><!-- product banner section ends -->
+{% endblock %}

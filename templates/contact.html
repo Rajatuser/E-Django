@@ -1,0 +1,82 @@
+{% extends 'nav.html' %}
+{% block title %}Contact{% endblock %}
+<!-- header section ends -->
+{% block cart %}
+ {% if request.user.is_authenticated %}
+            <a href="/cart/" class="fas fa-shopping-cart"><font color="#7cfc00">{{ cart }}</font></a>
+        {% else %}
+        <a href="/login/" class="fas fa-user"></a>
+     {% endif %}
+{% endblock %}
+{% block body %}
+
+<!-- contact info section starts  -->
+
+<section class="info-container">
+
+    <div class="box-container">
+
+        <div class="box">
+            <i class="fas fa-map"></i>
+            <h3>address</h3>
+            <p>Chandigarh, CU</p>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-envelope"></i>
+            <h3>email</h3>
+            <p>123cugraniteonline@gmail.com</p>
+           
+        </div>
+
+        <div class="box">
+            <i class="fas fa-phone"></i>
+            <h3>number</h3>
+            <p>+91 8608596045</p>
+            <p>+91 7569079568</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- contact info section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact">
+
+    <form action="{% url 'contact' %}" method="post">
+        <h3>get in touch</h3>
+        
+        <div class="inputBox">
+            <input type="text" name="cname" required placeholder="your name">
+            <input type="email" name="cemail" required placeholder="your email">
+        </div>
+        <div class="inputBox">
+            <input type="number" name="cnumber" required placeholder="your number">
+            <input type="text" name="csubject" required placeholder="subject">
+        </div>
+        <textarea name="cmessage" required placeholder="your message" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="send message" class="btn">
+         {% if messages %}
+  {% for message in messages %}
+          <div role="alert">
+  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+       <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong><p>
+        {{message}}</p></strong>
+       </div>
+  </div>
+</div>
+  {% endfor %}
+{% endif %}
+    </form>
+
+    <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.171611370124!2d76.57336461476996!3d30.769762590898775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ffb140bd63e07%3A0x68591e334d17a988!2sChandigarh%20University!5e0!3m2!1sen!2sin!4v1650512342458!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+
+</section>
+
+<!-- contact section ends -->
+
+{% endblock %}
