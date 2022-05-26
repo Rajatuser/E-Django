@@ -1,5 +1,6 @@
 from django.urls import path
 from granite import views
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     path('', views.homeview.as_view(), name='home'),
@@ -12,7 +13,7 @@ urlpatterns = [
     path('cart/',views.Cartview.as_view(), name='cart'),
     path('delete/',views.Removecart.as_view(), name='delete'),
     path('add/',views.Addcart.as_view(), name='add'),
-    path('search/',views.SearchView.as_view(),name='search')
+    path('search/',  cache_page(60 * 15)(views.SearchView.as_view()),name='search')
 
 
 ]

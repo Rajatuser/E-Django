@@ -217,6 +217,7 @@ class SearchView(ListView):
     template_name = 'search.html'
     context_object_name = 'products'
 
+
     def get_queryset(self):
         filters = self.request.GET.get('product')
         if filters == 'all' or filters == 'None' or filters == 'none':
@@ -242,7 +243,7 @@ class SearchView(ListView):
         exclude = SaleProduct.objects.values('product')
         product = self.request.GET.get('product')
         context['product'] = product
-        context['search']=self.request.GET.get('product')
+        context['search'] = self.request.GET.get('product')
         if self.request.user.is_authenticated:
             Incart = Cart.objects.filter(added_by=self.request.user).values_list('product_added').order_by(
                 'product_added')
